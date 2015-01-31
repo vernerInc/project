@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="dev spring-hiber:war exploded">
+    <output-path>$PROJECT_DIR$/modules/web/spring-hiber/target/spring-hiber.war</output-path>
+    <root id="root">
+      <element id="artifact" artifact-name="spring-hiber:war exploded" />
+    </root>
+  </artifact>
+</component>
