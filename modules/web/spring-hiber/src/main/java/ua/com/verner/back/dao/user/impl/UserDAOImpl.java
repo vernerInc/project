@@ -1,11 +1,13 @@
 package ua.com.verner.back.dao.user.impl;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ua.com.verner.back.dao.user.UserDAO;
 import ua.com.verner.back.entity.User;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -18,6 +20,25 @@ public class UserDAOImpl implements UserDAO {
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+
+    @Override
+    public User selectByLogin(String login) {
+        Session session = this.sessionFactory.openSession();
+        String hql = "from User u WHERE u.login = :login";
+        Query query = session.createQuery(hql);
+        query.setParameter("login", login);
+        User user = (User) query.uniqueResult();
+        session.close();
+        return user;
+    }
+
+    @Override
+    public User selectById(BigDecimal id) {
+        Session session = this.sessionFactory.openSession();
+        User user = (User) session.get(User.class, id);
+        session.close();
+        return user;
     }
 
     @Override
