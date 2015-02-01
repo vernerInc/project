@@ -37,7 +37,7 @@ public class UserDAOImplTest {
     public void testList() throws Exception {
         List<User> list = userDAO.list();
         for (User p : list) {
-            System.out.println("Person List::" + p);
+            System.out.println("users List::" + p);
         }
     }
 

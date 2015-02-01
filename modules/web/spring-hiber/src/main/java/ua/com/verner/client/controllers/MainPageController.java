@@ -27,11 +27,14 @@ public class MainPageController {
     }
 
     @RequestMapping(value = "/checkLogin", method = RequestMethod.GET)
-    public ModelAndView login(@RequestParam("login") String login) {
+    public ModelAndView login(@RequestParam("login") String login, @RequestParam("password") String password) {
         ModelAndView modelAndView = new ModelAndView("index");
         User user = userDAO.selectByLogin(login);
         if (user != null) {
-            modelAndView.addObject("result", true);
+            if(user.getPassword().equals(password)){
+                modelAndView.addObject("result", true);
+                modelAndView.addObject("user", user);
+            }
         } else {
             modelAndView.addObject("result", false);
         }
