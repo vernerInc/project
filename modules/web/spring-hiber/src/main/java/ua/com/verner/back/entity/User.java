@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * since 31.01.2015.
  */
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
     @Id
     @Column
@@ -71,5 +71,17 @@ public class User {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", middlename='" + middlename + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
     }
 }

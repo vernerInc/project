@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.verner.back.dao.user.UserDAO;
 import ua.com.verner.back.entity.User;
+import ua.com.verner.back.services.user.UserService;
 
 /**
  * author trancer
@@ -19,7 +19,7 @@ import ua.com.verner.back.entity.User;
 public class MainPageController {
 
     @Autowired
-    UserDAO userDAO;
+    private UserService userService;
 
     @RequestMapping({"/", "/home"})
     public String home() {
@@ -29,7 +29,7 @@ public class MainPageController {
     @RequestMapping(value = "/checkLogin", method = RequestMethod.GET)
     public ModelAndView login(@RequestParam("login") String login, @RequestParam("password") String password) {
         ModelAndView modelAndView = new ModelAndView("index");
-        User user = userDAO.selectByLogin(login);
+        User user = userService.selectByLogin(login);
         if (user != null) {
             if(user.getPassword().equals(password)){
                 modelAndView.addObject("result", true);
