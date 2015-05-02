@@ -1,6 +1,6 @@
 package ua.com.verner.back.dao.user;
 
-import ua.com.verner.back.entity.User;
+import ua.com.verner.back.entity.user.User;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface UserDAO {
 
-    User selectByLogin(String login);
+    User selectOne(String login);
 
-    User selectById(BigDecimal id);
+    User selectOne(BigDecimal id);
 
-    void save(User user);
+    void insert(User user);
 
     List<User> list();
 }

@@ -1,14 +1,15 @@
 package ua.com.verner.back.dao.user.impl;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.verner.back.dao.user.UserDAO;
-import ua.com.verner.back.entity.User;
+import ua.com.verner.back.entity.user.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -16,46 +17,35 @@ import java.util.List;
  * author trancer
  * since 31.01.2015.
  */
-@Repository
+@Repository("userDAO")
+@Transactional(propagation = Propagation.REQUIRED)
 public class UserDAOImpl implements UserDAO {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    private static final Logger logger = Logger.getLogger(UserDAOImpl.class);
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
-    public User selectByLogin(String login) {
-        Session session = this.sessionFactory.openSession();
-        String hql = "from User u WHERE u.login = :login";
-        Query query = session.createQuery(hql);
+    public User selectOne(String login) {
+        Query query = entityManager.createQuery("from User u WHERE u.login = :login");
         query.setParameter("login", login);
-        User user = (User) query.uniqueResult();
-        session.close();
-        return user;
+        return (User) query.getSingleResult();
     }
 
     @Override
-    public User selectById(BigDecimal id) {
-        Session session = this.sessionFactory.openSession();
-        User user = (User) session.get(User.class, id);
-        session.close();
-        return user;
+    public User selectOne(BigDecimal id) {
+        return entityManager.find(User.class, id);
     }
 
     @Override
-    public void save(User user) {
-        Session session = this.sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.persist(user);
-        tx.commit();
-        session.close();
+    public void insert(User user) {
+        entityManager.persist(user);
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<User> list() {
-        Session session = this.sessionFactory.openSession();
-        List<User> personList = session.createQuery("from User").list();
-        session.close();
-        return personList;
+        return entityManager.createQuery("from User").getResultList();
     }
 }

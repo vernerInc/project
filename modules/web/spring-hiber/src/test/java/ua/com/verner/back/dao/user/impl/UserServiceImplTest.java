@@ -8,13 +8,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.verner.back.entity.User;
+import ua.com.verner.back.entity.user.User;
 import ua.com.verner.back.services.user.UserService;
 
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/spring.xml"})
+@ContextConfiguration(locations = {"/springEM.xml"})
 @TransactionConfiguration(defaultRollback = true)
 @Transactional
 public class UserServiceImplTest {
@@ -29,8 +29,8 @@ public class UserServiceImplTest {
         User user = new User();
         user.setLogin("YAKOB4");
         user.setPassword("YAKOB");
-        user.setFirstname("Яков");
-        user.setLastname("Иванченко");
+        user.setFirstName("Яков");
+        user.setLastName("Иванченко");
         userService.save(user);
 
         List<User> list = userService.list();

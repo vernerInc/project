@@ -2,6 +2,7 @@ package ua.com.verner.client.conf;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -9,7 +10,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  * author trancer
  * since 31.01.2015.
  */
-
+@EnableAspectJAutoProxy
 @Configuration
 public class ApplicationConfig {
 

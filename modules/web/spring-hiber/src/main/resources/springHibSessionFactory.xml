@@ -20,7 +20,7 @@
         <property name="dataSource" ref="dataSource" />
         <property name="annotatedClasses">
             <list>
-                <value>ua.com.verner.back.entity.User</value>
+                <value>ua.com.verner.back.entity.user.User</value>
             </list>
         </property>
         <property name="hibernateProperties">

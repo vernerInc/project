@@ -1,6 +1,6 @@
 package ua.com.verner.back.services.user;
 
-import ua.com.verner.back.entity.User;
+import ua.com.verner.back.entity.user.User;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -13,14 +13,16 @@
     </modules>
 
     <properties>
-        <spring.version>4.0.3.RELEASE</spring.version>
-        <hiber.version>3.6.9.Final</hiber.version>
+        <spring.version>4.1.4.RELEASE</spring.version>
+        <hiber.version>4.3.8.Final</hiber.version>
+        <aspectj.version>1.5.4</aspectj.version>
 
         <!-- Logging -->
         <logback.version>1.0.13</logback.version>
         <slf4j.version>1.7.5</slf4j.version>
 
         <log4j.version>1.2.17</log4j.version>
+        <junit.version>4.11</junit.version>
 
     </properties>
 
@@ -47,6 +49,24 @@
                 <version>${spring.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
             <!--Hibernate-->
             <dependency>
                 <groupId>org.hibernate</groupId>
@@ -57,13 +77,19 @@
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-entitymanager</artifactId>
-                <version>4.3.5.Final</version>
+                <version>${hiber.version}</version>
+            </dependency>
+
+            <dependency>
+                <artifactId>hibernate-ehcache</artifactId>
+                <groupId>org.hibernate</groupId>
+                <version>${hiber.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.11</version>
+                <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
 

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.verner.back.dao.user.UserDAO;
-import ua.com.verner.back.entity.User;
+import ua.com.verner.back.entity.user.User;
 import ua.com.verner.back.services.user.UserService;
 
 import java.math.BigDecimal;
@@ -23,17 +23,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User selectByLogin(String login) {
-        return userDAO.selectByLogin(login);
+        User user = userDAO.selectOne(login);
+        if (user == null) {
+            return null;
+        } else {
+            user.getUserType();
+            return user;
+        }
     }
 
     @Override
     public User selectById(BigDecimal id) {
-        return userDAO.selectById(id);
+        return userDAO.selectOne(id);
     }
 
     @Override
     public void save(User user) {
-        userDAO.save(user);
+        userDAO.insert(user);
     }
 
     @Override
